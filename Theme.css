@@ -210,7 +210,7 @@
     height: 60px;
 }
 
-.h-120 {
+.h-120p {
     height: 120px;
 }
 
@@ -368,6 +368,10 @@
 
 .mg-r-20p {
     margin-right: 20px;
+}
+
+.mg-r-40p {
+    margin-right: 40px;
 }
 
 .mg-b-10p {

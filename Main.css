@@ -1,9 +1,32 @@
 * {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
-  }
-  
-  body {
-    background-color: #f3f3f4;
-  }
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #f3f3f4;
+}
+
+.pr-green-color {
+  background-color: #1ab394;
+}
+
+.pr-tab-header-color {
+  background-color: #d9d9d9;  
+}
+
+.pr-font-green-color {
+  color: #1ab394;  
+}
+
+#profileNavigate {
+  -webkit-appearance: none;  
+}
+
+#groupsList li, #friendsList li {
+  list-style: none;
+  font-size: 14px;
+  margin-left: -20px;
+  padding: 1px;
+}

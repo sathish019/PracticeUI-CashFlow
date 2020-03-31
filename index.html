@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cash Flow</title>
+    <link rel="stylesheet" type="text/css" href="Main.css" />
+    <link rel="stylesheet" type="text/css" href="Theme.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <nav class="pr-green-color w-100 pd-10 dp-flex-sp-bw white-color">
+        <div class="fa fa-dollar mg-l-40p">
+            <b>CashFlow</b>
+        </div>
+        <div class="mg-r-40p">
+            <i class="fa fa-user-circle"></i>
+            <select name="profile-navigate" id="profileNavigate" class="pr-green-color white-color no-border-ip border-rad-4p fs-13 pd-2 mg-l-5p">
+                <option value="Profile">Charlie</option>
+                <option value="View Expenses">View Expenses</option>
+                <option value="Log Out">Log Out</option>
+            </select>
+        </div>
+    </nav>
+
+    <section class="align-font-center mg-t-20p mg-b-20p">
+        <button class="pd-5 pr-green-color white-color no-border-ip border-rad-4p">Add Expense</button>
+        <button class="pd-5 mg-l-10p pr-green-color white-color no-border-ip border-rad-4p">Settle Up</button>
+    </section>
+
+    <section class="dp-flex">
+        <div class="mg-l-40p w-18">
+            <div class="dp-flex-c">
+                <div class="h-200p bg-white mg-l-40p w-71 border-rad-4p p-relative">
+                    <div class="dp-flex-sp-bw pd-5 pr-tab-header-color border-rad-4p fs-15">
+                        <Span>Groups</Span>
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <ul id="groupsList" class="mg-t-10p mg-b-10p h-120p overflow-y"></ul>
+                    <div class="p-absolute bottom-0 dp-flex-sp-bw mg-b-10p">
+                        <input id="addGroup" class="mg-l-10p w-66 fs-13 pd-2" type="text" placeholder="Add a group.."></input>
+                        <button class="no-border-ip border-rad-4p mg-r-10p pr-tab-header-color">Add</button>
+                    </div>
+                </div>
+                <div class="h-200p bg-white mg-t-20p mg-l-40p w-71 border-rad-4p p-relative">
+                    <div class="dp-flex-sp-bw pd-5 pr-tab-header-color border-rad-4p fs-15">
+                        <Span>Friends</Span>
+                        <i class="fa fa-user-plus"></i>
+                    </div>
+                    <ul id="friendsList" class="mg-t-10p mg-b-10p h-120p overflow-y"></ul>
+                    <div class="p-absolute bottom-0 dp-flex-sp-bw mg-b-10p">
+                        <input id="addFriend" class="mg-l-10p w-66 fs-13 pd-2" type="text" placeholder="Add a friend.."></input>
+                        <button class="no-border-ip border-rad-4p mg-r-10p pr-tab-header-color">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white mg-l-40p pd-20 border-rad-4p w-55">
+            <div class="align-font-center pr-font-green-color font-st-uline">
+               <b>Debts & Expenses</b>
+            </div>
+            <div id="renderDebts&Expenses"></div>
+        </div>
+    </section>
+
+    <footer class="pr-green-color white-color pd-10 fs-13 align-font-center bottom-0 p-absolute w-100">
+        <i>&copy;</i>
+        <span>2020 CashFlow Inc. All Rights Reserved. </span>
+    </footer>
+
+  </body>
+  <script src="modal.js"></script>
+  <script src="view.js"></script>
+  <script src="controller.js"></script>
+  <script src="app.js"></script>
+</html> 
