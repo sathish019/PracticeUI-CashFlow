@@ -9,56 +9,100 @@ class Controller {
     this.view.renderOverAllExpenses(this.modal.getFriendsList(),this.modal.getGroupsList());
     this.addNewListItem();
     this.relevantListItemExpenses(); 
+    this.addNewExpense();
   }
 
   addNewListItem() {
-    document.addEventListener("keyup", event => {
-      if(event.keyCode == 13) {  
-        const listItemId = event.target.id;
-        const listItemValue = event.target.value;
-        const groupsListId = document.getElementById(this.modal.getGroupsElementId());
-        const friendsListId = document.getElementById(this.modal.getFriendsElementId());
-        let newArray = [];
-        if(listItemId=="addGroup") {
-          newArray = this.modal.addNewGroup({
+    const newFriend = document.getElementById(this.modal.getAddFriendElementID());
+    newFriend.addEventListener("keyup", event => {
+        if(event.keyCode == 13) {  
+          const listItemValue = event.target.value;
+          const friendsListId = document.getElementById(this.modal.getFriendsElementId());
+          let newArray = this.modal.addNewFriend({
+            userId: this.modal.generateNewId(),
+            userName: listItemValue,
+            expenseDetails:[]  
+          });
+          friendsListId.innerHTML = "";
+          this.view.renderListItems(newArray, friendsListId); 
+        }
+    }); 
+    
+    const newGroup = document.getElementById(this.modal.getAddGroupElementID());
+    newGroup .addEventListener("keyup", event => {
+        if(event.keyCode == 13) {
+          const listItemValue = event.target.value;
+          const groupsListId = document.getElementById(this.modal.getGroupsElementId());
+          let newArray = this.modal.addNewGroup({
             groupId: this.modal.generateNewId(),
-            groupName: listItemValue
+            groupName: listItemValue,
+            expenseDetails:[],
+            groupMembers:[]
           });
           groupsListId.innerHTML = ""; 
           this.view.renderListItems(newArray, groupsListId);  
         }
-        else if(listItemId=="addFriend") {
-          newArray = this.modal.addNewFriend({
-            userId: this.modal.generateNewId(),
-            userName: listItemValue  
-          });
-          friendsListId.innerHTML = "";
-          this.view.renderListItems(newArray, friendsListId);  
-        }  
-      }
-    });  
+    });
   }
   
   relevantListItemExpenses() {
-    document.addEventListener("click", event => {
-      const eventTarget = event.target; 
-      
-      //friend or group relevant expenses
-      const listItemId = eventTarget.getAttribute("id");
-      const listItemContent = eventTarget.textContent;
-      let objectToRender;
-      if(eventTarget.classList.contains("group")) {
-        objectToRender = this.modal.filterObjectOfGroup(listItemId,listItemContent);    
-      }
-      else if(eventTarget.classList.contains("friend")){
-        objectToRender = this.modal.filterObjectOfFriend(listItemId,listItemContent);  
-      }
-      this.view.renderRelevantExpenses(objectToRender); 
-      
-      //add new expense
-      if(eventTarget.textContent=="Add Expense"){
-        this.view.addNewExpenseLayout();
-      }
-    }); 
+    const friendsContainer = document.getElementById(this.modal.getFriendsElementId());
+    friendsContainer.addEventListener("click", event => {
+      const eventTarget = event.target;
+      this.listItemExpenses(eventTarget); 
+    });
+
+    const groupsContainer = document.getElementById(this.modal.getGroupsElementId());
+    groupsContainer.addEventListener("click", event => {
+      const eventTarget = event.target;
+      this.listItemExpenses(eventTarget);
+    });
+  }        
+
+  //friend or group relevant expenses
+  listItemExpenses(eventTarget) {
+    const listItemId = eventTarget.getAttribute("id");
+    const listItemContent = eventTarget.textContent;
+    let objectToRender;
+    if(eventTarget.classList.contains("group")) {
+      event.stopPropagation();  
+      objectToRender = this.modal.filterObjectOfGroup(listItemId,listItemContent);    
+    }
+    else if(eventTarget.classList.contains("friend")){
+      event.stopPropagation();  
+      objectToRender = this.modal.filterObjectOfFriend(listItemId,listItemContent);  
+    }
+    this.view.renderRelevantExpenses(objectToRender); 
   }
+      
+    addNewExpense() {
+       const addExpenseBtn = document.getElementById(this.modal.getExpenseButton());
+       addExpenseBtn.addEventListener("click", event => {
+         const eventTarget = event.target; 
+         if(eventTarget.textContent=="Add Expense"){
+            event.stopPropagation();  
+            this.view.addNewExpenseLayout(this.modal.getFriendsList());
+            
+            const submitBtn = document.getElementById("okBtn");
+            submitBtn.addEventListener("click", event => {
+              const newExpDesc = document.getElementById("expnName").value;
+              const newExpAmount = document.getElementById("expnAmount").value;
+              const newExpYouPaid = document.getElementById("paidByYou").checked;
+              const newExpOfFriend = document.getElementById("pickedFriend").value;
+              
+              if(newExpOfFriend !== "select"){
+                this.modal.addNewFriendExpense(newExpYouPaid, newExpOfFriend, newExpDesc, newExpAmount);
+                alert("Expense added"); 
+              }
+            });
+
+            const cancelBtn = document.getElementById("cancelBtn");
+            cancelBtn.addEventListener("click", event => {
+              this.view.addNewExpenseLayout(this.modal.getFriendsList());  
+            });
+          } 
+       });
+        
+    }
+
 }

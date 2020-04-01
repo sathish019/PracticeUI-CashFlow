@@ -38,3 +38,11 @@ body {
 .expenseDtls div {
   font-size: 14px;
 }
+
+.z-green-btn {
+  padding: 5px;
+  color: white;
+  background-color: #1ab394;
+  border: none;
+  border-radius: 4px;  
+}

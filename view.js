@@ -120,19 +120,84 @@ class View {
     container.innerHTML = "";
   }
 
-  addNewExpenseLayout() {
+  addNewExpenseLayout(friendsList) {
     const container = document.getElementById(this.elementToRenderExpenses);
     container.innerHTML = "";
     
-    const expDataForm = document.forms["addNewExpense"];
     const expData = document.createElement("div");
-    const expName = document.createTextNode("Expense Name");
+    expData.classList.add("mg-t-20p");
+    const expName = document.createTextNode("Expense Name :");
     const expDesc = document.createElement("input");
+    expDesc.setAttribute("id","expnName");
+    expDesc.classList.add("mg-l-10p");
+
+    const expAmount = document.createElement("div");
+    expAmount.classList.add("mg-t-20p");
+    const expAmountLabel = document.createTextNode("Enter Amount :");
+    const expAmountValue = document.createElement("input");
+    expAmountValue.setAttribute("id","expnAmount");
+    expAmountValue.classList.add("mg-l-20p");
+
+    const paidByYou = document.createElement("div");
+    paidByYou.classList.add("mg-t-20p");
+    const checkBox = document.createElement("input");
+    checkBox.classList.add("mg-r-5p");
+    checkBox.setAttribute("type","checkbox");
+    checkBox.setAttribute("id","paidByYou");
+    const checkBoxLabel = document.createTextNode("Paid by You");
+
+    const pickFriend = document.createElement("div");
+    pickFriend.classList.add("mg-t-20p");
+    const pickFriendLabel = document.createTextNode("Pick a Friend -");
+    const pickFriendElement = document.createElement("select");
+    pickFriendElement.classList.add("mg-l-10p","z-green-btn");
+    pickFriendElement.setAttribute("id", "pickedFriend")
+    const pickFriendValue = document.createElement("option");
+    pickFriendValue.setAttribute("value","select");
+    pickFriendValue.setAttribute("selected","selected");
+    pickFriendValue.append(document.createTextNode("-- select --"));
+    this.friendsNameDropDown(friendsList,pickFriendElement);
+
+    const submitValues = document.createElement("div");
+    submitValues.classList.add("mg-t-20p", "align-font-center");
+    const okBtn = document.createElement("button");
+    okBtn.setAttribute("id","okBtn");
+    okBtn.classList.add("mg-r-10p","z-green-btn");
+    okBtn.append(document.createTextNode("Submit"));
+    const cancelBtn = document.createElement("button");
+    cancelBtn.setAttribute("id","cancelBtn");
+    cancelBtn.classList.add("mg-l-10p","z-green-btn");
+    cancelBtn.append(document.createTextNode("Cancel"));
 
     expData.appendChild(expName);
     expData.appendChild(expDesc);
-    expDataForm.appendChild(expData);
 
-    container.appendChild(expDataForm);
+    expAmount.appendChild(expAmountLabel);
+    expAmount.appendChild(expAmountValue);
+
+    paidByYou.appendChild(checkBox);
+    paidByYou.appendChild(checkBoxLabel);
+
+    pickFriend.appendChild(pickFriendLabel);
+    pickFriend.appendChild(pickFriendElement);
+    pickFriendElement.appendChild(pickFriendValue);
+
+    submitValues.appendChild(okBtn);
+    submitValues.appendChild(cancelBtn);
+
+    container.appendChild(expData);
+    container.appendChild(expAmount);
+    container.appendChild(paidByYou);
+    container.appendChild(pickFriend);
+    container.appendChild(submitValues);
   }
+
+  friendsNameDropDown(friendsList, pickFriendElement) {
+    friendsList.forEach((val,indx) => {
+      const opt = document.createElement("option");
+      opt.append(document.createTextNode(val.userName));
+      pickFriendElement.appendChild(opt);
+    });
+  }
+
 }

@@ -181,9 +181,13 @@
       groupMembers: ["Kelso", "Charlie", "Alan", "Jake"]  
     }
   ];
+  const endUser = "Charlie";
   const renderFriends = "friendsList";
   const renderGroups = "groupsList";
-  const modal = new Modal(friendList, groupList, renderFriends, renderGroups);
+  const newFriend = "addFriend";
+  const newGroup = "addGroup";
+  const newExpense = "newExpense";
+  const modal = new Modal(endUser, friendList, groupList, renderFriends, renderGroups, newFriend, newGroup, newExpense);
 
   const renderExpenses = "renderDebts&Expenses";
   const view = new View(renderFriends, renderGroups, renderExpenses);

@@ -1,9 +1,17 @@
 class Modal {
-  constructor(friendList, groupList, renderFriends, renderGroups) {
+  constructor(endUser, friendList, groupList, renderFriends, renderGroups, newFriend, newGroup, newExpense) {
+    this.endUser = endUser;  
     this.friendsList = friendList;
     this.groupsList = groupList;
     this.friendsElement = renderFriends;
     this.groupsElement = renderGroups;
+    this.addFriendInput = newFriend;
+    this.addGroupInput = newGroup;
+    this.newExpensebutton = newExpense;
+  }
+
+  getEndUserName() {
+    return this.endUser;  
   }
 
   generateNewId() {
@@ -15,7 +23,15 @@ class Modal {
   }
 
   getGroupsElementId() {
-     return this.groupsElement; 
+    return this.groupsElement; 
+  }
+
+  getAddFriendElementID() {
+    return this.addFriendInput;
+  }
+
+  getAddGroupElementID() {
+    return this.addGroupInput;  
   }
 
   getFriendsList() {
@@ -24,6 +40,10 @@ class Modal {
 
   getGroupsList() {
     return this.groupsList;
+  }
+
+  getExpenseButton() {
+    return this.newExpensebutton;  
   }
 
   addNewFriend(newArrayObject) {  
@@ -54,5 +74,26 @@ class Modal {
         }
       }); 
     return object;  
+  }
+
+  addNewFriendExpense(newExpYouPaid, user, newExpDesc, newExpAmount) {
+    this.friendsList.forEach(element => {
+      if((user == element.userName) && (newExpYouPaid == false)){
+         element.expenseDetails.push({
+            expenseId: this.generateNewId(),
+            expenseName: newExpDesc,
+            paidByuser: this.endUser,
+            paidAmount: newExpAmount
+        }); 
+      }
+      else if((user == element.userName) && (newExpYouPaid == true)){
+        element.expenseDetails.push({
+            expenseId: this.generateNewId(),
+            expenseName: newExpDesc,
+            paidByuser: user,
+            paidAmount: newExpAmount
+        });
+      }  
+    });
   }
 }
