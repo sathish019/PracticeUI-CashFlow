@@ -6,6 +6,7 @@ class Controller {
 
   expenseDetails() {
     this.view.renderDebtsAndExpenses(this.modal.getFriendsList(),this.modal.getGroupsList()); 
+    this.view.renderOverAllExpenses(this.modal.getFriendsList(),this.modal.getGroupsList());
     this.addNewListItem();
     this.relevantListItemExpenses(); 
   }
@@ -40,8 +41,24 @@ class Controller {
   
   relevantListItemExpenses() {
     document.addEventListener("click", event => {
-      const listItem = event.target;  
+      const eventTarget = event.target; 
       
+      //friend or group relevant expenses
+      const listItemId = eventTarget.getAttribute("id");
+      const listItemContent = eventTarget.textContent;
+      let objectToRender;
+      if(eventTarget.classList.contains("group")) {
+        objectToRender = this.modal.filterObjectOfGroup(listItemId,listItemContent);    
+      }
+      else if(eventTarget.classList.contains("friend")){
+        objectToRender = this.modal.filterObjectOfFriend(listItemId,listItemContent);  
+      }
+      this.view.renderRelevantExpenses(objectToRender); 
+      
+      //add new expense
+      if(eventTarget.textContent=="Add Expense"){
+        this.view.addNewExpenseLayout();
+      }
     }); 
   }
 }

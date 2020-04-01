@@ -1,6 +1,6 @@
 class Modal {
   constructor(friendList, groupList, renderFriends, renderGroups) {
-    this.frindsList = friendList;
+    this.friendsList = friendList;
     this.groupsList = groupList;
     this.friendsElement = renderFriends;
     this.groupsElement = renderGroups;
@@ -19,7 +19,7 @@ class Modal {
   }
 
   getFriendsList() {
-    return this.frindsList;
+    return this.friendsList;
   }
 
   getGroupsList() {
@@ -27,12 +27,32 @@ class Modal {
   }
 
   addNewFriend(newArrayObject) {  
-    this.frindsList.push(newArrayObject);
-    return this.frindsList;
+    this.friendsList.push(newArrayObject);
+    return this.friendsList;
   }
 
   addNewGroup(newArrayObject) {  
     this.groupsList.push(newArrayObject);
     return this.groupsList;
+  }
+
+  filterObjectOfFriend(objectId,objectName) {
+    const object = this.friendsList.filter(
+      (obj) => {
+        if(obj.userId == parseInt(objectId) && obj.userName == objectName){
+          return obj;
+        } 
+      });
+    return object; 
+  }
+
+  filterObjectOfGroup(objectId,objectName) {
+    const object = this.groupsList.filter(
+      (obj) => {
+        if(obj.groupId == parseInt(objectId) && obj.groupName == objectName){
+          return obj;
+        }
+      }); 
+    return object;  
   }
 }

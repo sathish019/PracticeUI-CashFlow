@@ -30,3 +30,11 @@ body {
   margin-left: -20px;
   padding: 1px;
 }
+
+.groupMembr div {
+  font-size: 14px;  
+}
+
+.expenseDtls div {
+  font-size: 14px;
+}
