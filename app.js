@@ -168,17 +168,17 @@
           expenseName: "Room rent",
           paidByuser: "Alan",
           paidAmount: 700,
-          splitBetweenusers: ["Alan", "Kelso"]
+          splitBetweenusers: ["Alan", "Robin"]
         },
         {
           expenseId: 50013,
           expenseName: "Drinks",
-          paidByuser: "Kelso",
+          paidByuser: "Robin",
           paidAmount: 300,
-          splitBetweenusers: ["Alan", "Charlie", "Jake", "Kelso"]
+          splitBetweenusers: ["Alan", "Charlie", "Jake", "Robin"]
         }
       ],
-      groupMembers: ["Kelso", "Charlie", "Alan", "Jake"]  
+      groupMembers: ["Robin", "Charlie", "Alan", "Jake"]  
     }
   ];
   const endUser = "Charlie";
